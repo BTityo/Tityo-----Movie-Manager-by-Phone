@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ModernUI.WPFCore" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Contents\Images\Icon\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MobileMovieManager.DAL\MobileMovieManager.DAL.csproj" />
+  </ItemGroup>
+
+</Project>
