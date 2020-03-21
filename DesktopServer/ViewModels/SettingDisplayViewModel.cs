@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace DesktopServer.ViewModels
 {
-    public class SettingDisplayViewModel : NotifyPropertyChanged
+    public class SettingDisplayViewModel : BaseViewModel
     {
         private const string FontSmall = "Kicsi";
         private const string FontLarge = "Nagy";

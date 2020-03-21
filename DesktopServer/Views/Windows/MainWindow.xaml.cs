@@ -1,4 +1,6 @@
-﻿using FirstFloor.ModernUI.Windows.Controls;
+﻿using DesktopServer.Service;
+using FirstFloor.ModernUI.Windows.Controls;
+using MobileMovieManager.DAL.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,11 @@ namespace DesktopServer.Views.Windows
         public MainWindow()
         {
             InitializeComponent();
+
+            using (var dbContext = new MobileMovieManagerDbContext(Constants.LocalDBPath))
+            {
+                var test = dbContext;
+            }
         }
     }
 }

@@ -7,11 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Contents\Images\Icon\Logo.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Contents\Images\Icon\Logo.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ModernUI.WPFCore" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Contents\Images\Icon\" />
+    <Folder Include="Contents\Database\" />
   </ItemGroup>
 
   <ItemGroup>
