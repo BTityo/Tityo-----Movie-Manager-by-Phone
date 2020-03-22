@@ -41,7 +41,7 @@ namespace MobileMovieManager.DAL.Repository
         /// Get all entity async
         /// </summary>
         /// <returns>IEnumerable</returns>
-        public async Task<List<T>> GetAllAsync()
+        public virtual async Task<List<T>> GetAllAsync()
         {
             return await context.Set<T>().ToListAsync();
         }
@@ -51,7 +51,7 @@ namespace MobileMovieManager.DAL.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns>T</returns>
-        public async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(int id)
         {
             return await context.Set<T>().FindAsync(id);
         }
@@ -74,7 +74,7 @@ namespace MobileMovieManager.DAL.Repository
         /// </summary>
         /// <param name="model"></param>
         /// <returns>T</returns>
-        public async Task<T> UpdateAsync(T model)
+        public virtual async Task<T> UpdateAsync(T model)
         {
             context.Entry(model).State = EntityState.Modified;
             await SaveAsync();

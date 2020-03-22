@@ -30,7 +30,6 @@ namespace MobileMovieManager.DAL.Models
         // Display settings
         public string SelectedPalette { get; set; }
         public string SelectedTheme { get; set; }
-        public string SelectedFontSize { get; set; }
         public byte[] SelectedAccentColor { get; set; }
 
         public virtual ICollection<FileType> FileTypes { get; set; }
