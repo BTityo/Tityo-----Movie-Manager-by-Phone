@@ -1,15 +1,13 @@
 ﻿using FirstFloor.ModernUI.Presentation;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Media;
 
 namespace DesktopServer.ViewModels
 {
-    public class SettingDisplayViewModel : BaseViewModel
+    public class SettingViewModel : BaseViewModel
     {
-        private const string FontSmall = "Kicsi";
-        private const string FontLarge = "Nagy";
-
         private const string PaletteMetro = "Metro Modern UI";
         private const string PaletteWP = "Windows Phone";
 
@@ -55,15 +53,13 @@ namespace DesktopServer.ViewModels
         private Color selectedAccentColor;
         private LinkCollection themes = new LinkCollection();
         private Link selectedTheme;
-        private string selectedFontSize;
 
-        public SettingDisplayViewModel()
+        public SettingViewModel()
         {
             // Add default themes
             this.themes.Add(new Link { DisplayName = "Sötét", Source = AppearanceManager.DarkThemeSource });
             this.themes.Add(new Link { DisplayName = "Világos", Source = AppearanceManager.LightThemeSource });
 
-            this.SelectedFontSize = AppearanceManager.Current.FontSize == FontSize.Large ? FontLarge : FontSmall;
             SyncThemeAndColor();
 
             AppearanceManager.Current.PropertyChanged += OnAppearanceManagerPropertyChanged;
@@ -91,11 +87,6 @@ namespace DesktopServer.ViewModels
             get { return this.themes; }
         }
 
-        public string[] FontSizes
-        {
-            get { return new string[] { FontSmall, FontLarge }; }
-        }
-
         public string[] Palettes
         {
             get { return new string[] { PaletteMetro, PaletteWP }; }
@@ -114,9 +105,10 @@ namespace DesktopServer.ViewModels
                 if (this.selectedPalette != value)
                 {
                     this.selectedPalette = value;
+                    this.SelectedPalette = value;
                     OnPropertyChanged("AccentColors");
 
-                    this.SelectedAccentColor = this.AccentColors.FirstOrDefault();
+                    //this.SelectedAccentColor = this.AccentColors.FirstOrDefault();
                 }
             }
         }
@@ -137,21 +129,6 @@ namespace DesktopServer.ViewModels
             }
         }
 
-        public string SelectedFontSize
-        {
-            get { return this.selectedFontSize; }
-            set
-            {
-                if (this.selectedFontSize != value)
-                {
-                    this.selectedFontSize = value;
-                    OnPropertyChanged("SelectedFontSize");
-
-                    AppearanceManager.Current.FontSize = value == FontLarge ? FontSize.Large : FontSize.Small;
-                }
-            }
-        }
-
         public Color SelectedAccentColor
         {
             get { return this.selectedAccentColor; }
@@ -163,6 +140,120 @@ namespace DesktopServer.ViewModels
                     OnPropertyChanged("SelectedAccentColor");
 
                     AppearanceManager.Current.AccentColor = value;
+                }
+            }
+        }
+
+        // Server setting
+        private string connectedPhone;
+        public string ConnectedPhone
+        {
+            get { return connectedPhone; }
+            set
+            {
+                if (connectedPhone != value)
+                {
+                    connectedPhone = value;
+                    OnPropertyChanged("ConnectedPhone");
+                }
+            }
+        }
+
+        private string serverIP;
+        public string ServerIP
+        {
+            get { return serverIP; }
+            set
+            {
+                if (serverIP != value)
+                {
+                    serverIP = value;
+                    OnPropertyChanged("ServerIP");
+                }
+            }
+        }
+
+        private int port;
+        public int Port
+        {
+            get { return port; }
+            set
+            {
+                if (port != value)
+                {
+                    port = value;
+                    OnPropertyChanged("Port");
+                }
+            }
+        }
+
+        // User settings
+        private bool isStartWithWindows;
+        public bool IsStartWithWindows
+        {
+            get { return isStartWithWindows; }
+            set
+            {
+                if (isStartWithWindows != value)
+                {
+                    isStartWithWindows = value;
+                    OnPropertyChanged("IsStartWithWindows");
+                }
+            }
+        }
+
+        private bool isSearchForSubtitle;
+        public bool IsSearchForSubtitle
+        {
+            get { return isSearchForSubtitle; }
+            set
+            {
+                if (isSearchForSubtitle != value)
+                {
+                    isSearchForSubtitle = value;
+                    OnPropertyChanged("IsSearchForSubtitle");
+                }
+            }
+        }
+
+        private string userName;
+        public string UserName
+        {
+            get { return userName; }
+            set
+            {
+                if (userName != value)
+                {
+                    userName = value;
+                    OnPropertyChanged("UserName");
+                }
+            }
+        }
+
+        private string moviesPath;
+        public string MoviesPath
+        {
+            get { return moviesPath; }
+            set
+            {
+                if (moviesPath != value)
+                {
+                    moviesPath = value;
+                    OnPropertyChanged("MoviesPath");
+                }
+            }
+        }
+
+        private ICollection<FileTypeViewModel> fileTypeViewModels;
+        public ICollection<FileTypeViewModel> FileTypeViewModels
+        {
+            get { return fileTypeViewModels; }
+            set
+            {
+                if (fileTypeViewModels != value)
+                {
+                    fileTypeViewModels = value;
+                    OnPropertyChanged("FileTypeViewModels");
                 }
             }
         }

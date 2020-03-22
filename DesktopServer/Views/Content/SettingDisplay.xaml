@@ -10,6 +10,10 @@
     <Grid>
         <ScrollViewer>
             <StackPanel x:Name="Panel" MinWidth="150">
+                <StackPanel.Resources>
+                    <PathGeometry x:Key="HomeIconData">M17 3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.89 21 5 21H19C20.1 21 21 20.1 21 19V7L17 3M19 19H5V5H16.17L19 7.83V19M12 12C10.34 12 9 13.34 9 15S10.34 18 12 18 15 16.66 15 15 13.66 12 12 12M6 6H15V10H6V6Z</PathGeometry>
+                </StackPanel.Resources>
+                
                 <TextBlock Text="Felület megjelenése" Style="{StaticResource Heading2}" Margin="0,0,0,8" />
 
                 <ListBox ItemsSource="{Binding AccentColors}"
@@ -40,16 +44,17 @@
                         <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="Szín paletta:" VerticalAlignment="Center" Margin="0,0,16,4" />
-                    <ComboBox Grid.Column="1" ItemsSource="{Binding Palettes}" SelectedItem="{Binding SelectedPalette, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,0,4" />
+                    <ComboBox Grid.Column="1" ItemsSource="{Binding Palettes}" SelectedItem="{Binding SelectedPalette, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,0,4" SelectionChanged="ComboBox_SelectionChanged" />
 
                     <TextBlock Grid.Row="1" Text="Téma:" VerticalAlignment="Center" Margin="0,0,16,4" />
                     <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" DisplayMemberPath="DisplayName" VerticalAlignment="Center" Margin="0,0,0,4" />
 
-                    <TextBlock Grid.Row="2" Text="Betű mérete:" VerticalAlignment="Center" Margin="0,0,16,0" />
-                    <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding FontSizes}" SelectedItem="{Binding SelectedFontSize, Mode=TwoWay}" VerticalAlignment="Center" />
+                    <mui:BBCodeBlock Grid.Row="2" Grid.ColumnSpan="2" BBCode="[u][color=#ff4500]Mentéssel eltároljuk az összes beállítást[/color][/u]" VerticalAlignment="Center" Margin="0,20,0,5" HorizontalAlignment="Center" />
+                    <mui:ModernButton x:Name="buttonSave" Grid.Row="3" Grid.ColumnSpan="2" ToolTip="Mentés" IconData="{StaticResource HomeIconData}" EllipseDiameter="64" EllipseStrokeThickness="2" IconWidth="42" IconHeight="42" IsDefault="True" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Click="buttonSave_Click"/>
                 </Grid>
             </StackPanel>
         </ScrollViewer>
