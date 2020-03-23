@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:DesktopServer.Views.Content"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="OnLoaded">
     <Grid>
         <ScrollViewer>
             <StackPanel x:Name="Panel" MinWidth="150">
@@ -47,14 +47,16 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Szín paletta:" VerticalAlignment="Center" Margin="0,0,16,4" />
-                    <ComboBox Grid.Column="1" ItemsSource="{Binding Palettes}" SelectedItem="{Binding SelectedPalette, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,0,4" SelectionChanged="ComboBox_SelectionChanged" />
+                    <Label Content="Szín paletta:" VerticalAlignment="Center" Margin="0,0,16,4" />
+                    <ComboBox x:Name="comboBoxPalette" Grid.Column="1" ItemsSource="{Binding Palettes}" SelectedItem="{Binding SelectedPalette, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,0,4" SelectionChanged="ComboBox_SelectionChanged" />
 
-                    <TextBlock Grid.Row="1" Text="Téma:" VerticalAlignment="Center" Margin="0,0,16,4" />
+                    <Label Grid.Row="1" Content="Téma:" VerticalAlignment="Center" Margin="0,0,16,4" />
                     <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" DisplayMemberPath="DisplayName" VerticalAlignment="Center" Margin="0,0,0,4" />
 
-                    <mui:BBCodeBlock Grid.Row="2" Grid.ColumnSpan="2" BBCode="[u][color=#ff4500]Mentéssel eltároljuk az összes beállítást[/color][/u]" VerticalAlignment="Center" Margin="0,20,0,5" HorizontalAlignment="Center" />
-                    <mui:ModernButton x:Name="buttonSave" Grid.Row="3" Grid.ColumnSpan="2" ToolTip="Mentés" IconData="{StaticResource HomeIconData}" EllipseDiameter="64" EllipseStrokeThickness="2" IconWidth="42" IconHeight="42" IsDefault="True" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Click="buttonSave_Click"/>
+                    <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Margin="0,20,0,5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <local:SaveWarning/>
+                    </StackPanel>
+                    <!--<mui:ModernButton x:Name="buttonSave" Grid.Row="3" Grid.ColumnSpan="2" ToolTip="Mentés" IconData="{StaticResource HomeIconData}" EllipseDiameter="64" EllipseStrokeThickness="2" IconWidth="42" IconHeight="42" IsDefault="True" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Click="buttonSave_Click"/>-->
                 </Grid>
             </StackPanel>
         </ScrollViewer>

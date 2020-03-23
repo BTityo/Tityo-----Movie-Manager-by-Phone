@@ -3,21 +3,9 @@ using DesktopServer.Service;
 using DesktopServer.ViewModels;
 using FirstFloor.ModernUI.Windows.Controls;
 using MobileMovieManager.BLL.Service;
-using MobileMovieManager.DAL.Context;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DesktopServer.Views.Windows
 {
@@ -44,6 +32,29 @@ namespace DesktopServer.Views.Windows
             await settingService.GetSettingByIdAsync(1).ContinueWith(setting =>
             {
                 settingViewModel = SettingMap.MapToSettingViewModel(setting.Result);
+
+                // Check setted Movies folder is exists
+                if (!Directory.Exists(settingViewModel.MoviesPath))
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        MessageBoxResult result = ModernDialog.ShowMessage("A(z) '" + settingViewModel.MoviesPath + "' mappa nem létezik! Szeretnéd megváltoztatni?", "'Filmek' mappa nem létezik", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            ContentSource = new Uri("/DesktopServer;component/Views/Pages/Setting.xaml", UriKind.Relative);
+                        }
+                        else
+                        {
+                            ContentSource = new Uri("/DesktopServer;component/Views/Pages/Movie.xaml", UriKind.Relative);
+                        }
+                    });
+                }
+                else
+                {
+                    this.Dispatcher.Invoke(() =>
+                        ContentSource = new Uri("/DesktopServer;component/Views/Pages/Movie.xaml", UriKind.Relative)
+                    );
+                }
             });
         }
     }

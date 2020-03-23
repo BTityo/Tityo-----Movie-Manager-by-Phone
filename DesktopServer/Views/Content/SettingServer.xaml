@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:DesktopServer.Views.Content"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
+             Loaded="OnLoaded"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <ScrollViewer>
@@ -30,26 +31,32 @@
                         <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Szerver IP:" VerticalAlignment="Center" Margin="0,0,16,4" />
-                    <TextBox Grid.Column="1" Text="{Binding ServerIP, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,0,4" />
+                    <mui:BBCodeBlock BBCode="[color=red]*[/color]" VerticalAlignment="Center" Margin="0,0,0,4" HorizontalAlignment="Left"/>
+                    <Label Content="Szerver IP:" Target="{Binding ElementName=textBoxServerIP}" VerticalAlignment="Center" Margin="8,0,16,4" HorizontalAlignment="Stretch" />
+                    <TextBox x:Name="textBoxServerIP" Grid.Column="1" Text="{Binding ServerIP, Mode=TwoWay, ValidatesOnDataErrors=True}" VerticalAlignment="Center" Margin="0,0,0,4" />
 
-                    <TextBlock Grid.Row="1" Text="Port:" VerticalAlignment="Center" Margin="0,0,16,4" />
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Port}" VerticalAlignment="Center" Margin="0,0,0,4" />
+                    <mui:BBCodeBlock Grid.Row="1" BBCode="[color=red]*[/color]" VerticalAlignment="Center" Margin="0,0,0,4" HorizontalAlignment="Left"/>
+                    <Label Grid.Row="1" Content="Port:" Target="{Binding ElementName=textBoxPort}" VerticalAlignment="Center" Margin="8,0,16,4" />
+                    <TextBox x:Name="textBoxPort" Grid.Row="1" Grid.Column="1" Text="{Binding Port, Mode=TwoWay, ValidatesOnDataErrors=True}" VerticalAlignment="Center" Margin="0,0,0,4" PreviewTextInput="textBoxPort_PreviewTextInput" />
 
-                    <TextBlock Grid.Row="2" Text="Filmek könyvtár:" VerticalAlignment="Center" Margin="0,0,16,4" />
-                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding MoviesPath}" VerticalAlignment="Center" Margin="0,0,0,4" MinWidth="120" />
+                    <mui:BBCodeBlock Grid.Row="2" BBCode="[color=red]*[/color]" VerticalAlignment="Center" Margin="0,0,0,4" HorizontalAlignment="Left"/>
+                    <Label Grid.Row="2" Content="Filmek könyvtár:" Target="{Binding ElementName=textBoxMoviesPath}" VerticalAlignment="Center" Margin="8,0,16,4" />
+                    <TextBox x:Name="textBoxMoviesPath" Grid.Row="2" Grid.Column="1" Text="{Binding MoviesPath, Mode=TwoWay, ValidatesOnDataErrors=True}" VerticalAlignment="Center" Margin="0,0,0,4" MinWidth="120" />
                     <Button x:Name="buttonOpenMovieFolder" Grid.Row="2" Grid.Column="2" Content="Megnyitás" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,0,0,4" FontSize="11"/>
 
-                    <TextBlock Grid.Row="3" Text="Csatolt telefon:" VerticalAlignment="Center" Margin="0,0,16,4" />
-                    <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True" Text="{Binding ConnectedPhone}" VerticalAlignment="Center" />
+                    <Label Grid.Row="3" Content="Csatolt telefon:" VerticalAlignment="Center" Margin="0,0,16,4" />
+                    <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True" Text="{Binding ConnectedPhone, Mode=TwoWay}" VerticalAlignment="Center" />
 
-                    <TextBlock Grid.Row="4" Text="Típusok:" VerticalAlignment="Center" Margin="0,0,16,0" />
+                    <Label Grid.Row="4" Content="Típusok:" VerticalAlignment="Center" Margin="0,0,16,0" />
                     <StackPanel x:Name="stackPanelTypes" Grid.Row="4" Grid.Column="1" Orientation="Vertical"/>
-                    
-                    <mui:BBCodeBlock Grid.Row="5" Grid.ColumnSpan="3" BBCode="[u][color=#ff4500]Mentéssel eltároljuk az összes beállítást[/color][/u]" VerticalAlignment="Center" Margin="0,20,0,5" HorizontalAlignment="Center" />
-                    <mui:ModernButton x:Name="buttonSave" Grid.Row="6" Grid.ColumnSpan="3" ToolTip="Mentés" IconData="{StaticResource HomeIconData}" EllipseDiameter="64" EllipseStrokeThickness="2" IconWidth="42" IconHeight="42" IsDefault="True" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Click="buttonSave_Click"/>
+
+                    <StackPanel Grid.Row="5" Grid.ColumnSpan="3" Margin="0,20,0,5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <local:SaveWarning/>
+                    </StackPanel>
+                    <!--<mui:ModernButton x:Name="buttonSave" Grid.Row="6" Grid.ColumnSpan="3" ToolTip="Mentés" IconData="{StaticResource HomeIconData}" EllipseDiameter="64" EllipseStrokeThickness="2" IconWidth="42" IconHeight="42" IsDefault="True" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Click="buttonSave_Click"/>-->
                 </Grid>
             </StackPanel>
         </ScrollViewer>

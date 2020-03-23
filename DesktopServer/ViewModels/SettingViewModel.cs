@@ -1,4 +1,5 @@
 ﻿using FirstFloor.ModernUI.Presentation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Windows.Media;
 
 namespace DesktopServer.ViewModels
 {
-    public class SettingViewModel : BaseViewModel
+    public class SettingViewModel : BaseViewModel, IDataErrorInfo
     {
         private const string PaletteMetro = "Metro Modern UI";
         private const string PaletteWP = "Windows Phone";
@@ -60,7 +61,7 @@ namespace DesktopServer.ViewModels
             this.themes.Add(new Link { DisplayName = "Sötét", Source = AppearanceManager.DarkThemeSource });
             this.themes.Add(new Link { DisplayName = "Világos", Source = AppearanceManager.LightThemeSource });
 
-            SyncThemeAndColor();
+            //SyncThemeAndColor();
 
             AppearanceManager.Current.PropertyChanged += OnAppearanceManagerPropertyChanged;
         }
@@ -254,6 +255,29 @@ namespace DesktopServer.ViewModels
                 {
                     fileTypeViewModels = value;
                     OnPropertyChanged("FileTypeViewModels");
+                }
+            }
+        }
+
+        public string Error
+        {
+            get { return null; }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                switch (columnName)
+                {
+                    case "ServerIP":
+                        return string.IsNullOrEmpty(this.serverIP) && !this.serverIP.Contains("192.168.1.") ? "Kötelező (192.168.1.XXX)" : null;
+                    case "Port":
+                        return this.port < 1001 || this.port > 9999 ? "Kötelező (1001 és 9999 között)" : null;
+                    case "MoviesPath":
+                        return string.IsNullOrEmpty(this.moviesPath) ? "Kötelező" : null;
+                    default:
+                        return null;
                 }
             }
         }
