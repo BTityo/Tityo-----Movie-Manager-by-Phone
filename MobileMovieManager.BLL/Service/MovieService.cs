@@ -10,15 +10,18 @@ namespace MobileMovieManager.BLL.Service
     public class MovieService
     {
         private IMovieRepo<Movie> movieRepo;
+        private IFileTypeRepo<FileType> fileTypeRepo;
 
         public MovieService(string connectionString)
         {
             this.movieRepo = new MovieRepo(new MobileMovieManagerDbContext(connectionString));
+            this.fileTypeRepo = new FileTypeRepo(new MobileMovieManagerDbContext(connectionString));
         }
 
-        public MovieService(IMovieRepo<Movie> movieRepo)
+        public MovieService(IMovieRepo<Movie> movieRepo, IFileTypeRepo<FileType> fileTypeRepo)
         {
             this.movieRepo = movieRepo;
+            this.fileTypeRepo = fileTypeRepo;
         }
 
         /// <summary>
@@ -27,6 +30,8 @@ namespace MobileMovieManager.BLL.Service
         /// <returns>Task<List<Movie>></returns>
         public async Task<List<Movie>> GetMoviesAsync()
         {
+            List<Movie> movies = await movieRepo.GetAllAsync();
+            movies.ForEach(async m => m.FileType = await fileTypeRepo.GetByIdAsync(m.FileTypeId));
             return await movieRepo.GetAllAsync();
         }
 
@@ -51,6 +56,16 @@ namespace MobileMovieManager.BLL.Service
         }
 
         /// <summary>
+        /// Insert all movies to database async
+        /// </summary>
+        /// <param name="movies"></param>
+        /// <returns>Task<List<Movie>></returns>
+        public async Task<List<Movie>> InsertAllMovieAsync(List<Movie> movies)
+        {
+            return await movieRepo.InsertAllMovieAsync(movies);
+        }
+
+        /// <summary>
         /// Update movie in database async
         /// </summary>
         /// <param name="movie"></param>
@@ -61,6 +76,16 @@ namespace MobileMovieManager.BLL.Service
         }
 
         /// <summary>
+        /// Update all movies in database async
+        /// </summary>
+        /// <param name="movies"></param>
+        /// <returns>Task<List<Movie>></returns>
+        public async Task<List<Movie>> UpdateAllMovieAsync(List<Movie> movies)
+        {
+            return await movieRepo.UpdateAllMovieAsync(movies);
+        }
+
+        /// <summary>
         /// Delete movie by id async
         /// </summary>
         /// <param name="movieId"></param>
@@ -68,6 +93,16 @@ namespace MobileMovieManager.BLL.Service
         public async Task<bool> DeleteMovieByIdAsync(int movieId)
         {
             return await movieRepo.DeleteByIdAsync(movieId);
+        }
+
+        /// <summary>
+        /// Delete movies by List<int> /MovieId/ async
+        /// </summary>
+        /// <param name="movieIds"></param>
+        /// <returns>Task<bool></returns>
+        public async Task<bool> DeleteMoviesByListIdAsync(List<int> movieIds)
+        {
+            return await movieRepo.DeleteMoviesByListIdAsync(movieIds);
         }
     }
 }
