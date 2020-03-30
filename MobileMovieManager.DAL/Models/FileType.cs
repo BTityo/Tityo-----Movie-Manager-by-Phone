@@ -9,11 +9,13 @@ namespace MobileMovieManager.DAL.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required, MaxLength(40)]
+        [Required]
         public string TypeName { get; set; }
         [Required]
         public bool IsChecked { get; set; }
 
+
+        public virtual ICollection<Filter> Filters { get; set; }
         public virtual ICollection<Movie> Movies { get; set; }
     }
 }

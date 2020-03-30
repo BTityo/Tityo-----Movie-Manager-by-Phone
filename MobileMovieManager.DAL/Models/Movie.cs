@@ -40,6 +40,15 @@ namespace MobileMovieManager.DAL.Models
         private bool isFavorite;
         public bool IsFavorite { get { return isFavorite; } set { isFavorite = value; } }
 
+        private string imdbId;
+        public string ImdbId { get { return imdbId; } set { imdbId = value; } }
+
+        private bool isMoreCD;
+        public bool IsMoreCD { get { return isMoreCD; } set { isMoreCD = value; } }
+
+        private bool isSeries;
+        public bool IsSeries { get { return isSeries; } set { isSeries = value; } }
+
 
         private int fileTypeId;
         [Required]
@@ -64,6 +73,9 @@ namespace MobileMovieManager.DAL.Models
             info.AddValue("size", size, typeof(string));
             info.AddValue("creationTime", creationTime, typeof(DateTime));
             info.AddValue("isFavorite", isFavorite, typeof(bool));
+            info.AddValue("imdbId", imdbId, typeof(string));
+            info.AddValue("isMoreCD", isMoreCD, typeof(bool));
+            info.AddValue("isSeries", isSeries, typeof(bool));
         }
 
         public Movie(SerializationInfo info, StreamingContext context)
@@ -80,6 +92,9 @@ namespace MobileMovieManager.DAL.Models
             size = (string)info.GetValue("size", typeof(string));
             creationTime = (DateTime)info.GetValue("creationTime", typeof(DateTime));
             isFavorite = (bool)info.GetValue("isFavorite", typeof(bool));
+            imdbId = (string)info.GetValue("imdbId", typeof(string));
+            isMoreCD = (bool)info.GetValue("isMoreCD", typeof(bool));
+            isSeries = (bool)info.GetValue("isSeries", typeof(bool));
         }
     }
 }

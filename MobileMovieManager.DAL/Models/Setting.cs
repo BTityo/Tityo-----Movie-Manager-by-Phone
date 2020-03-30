@@ -32,6 +32,7 @@ namespace MobileMovieManager.DAL.Models
         public string SelectedTheme { get; set; }
         public byte[] SelectedAccentColor { get; set; }
 
+
         public virtual ICollection<FileType> FileTypes { get; set; }
     }
 }
