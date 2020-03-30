@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneClient", "PhoneClient\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesktopServer", "DesktopServer\DesktopServer.csproj", "{A01F0A5E-CCBB-4CB5-AEE6-319E99E8EC62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileMovieManager.DAL", "MobileMovieManager.DAL\MobileMovieManager.DAL.csproj", "{E996BE7E-3F21-410D-8480-4D8066101D56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileMovieManager.DAL", "MobileMovieManager.DAL\MobileMovieManager.DAL.csproj", "{E996BE7E-3F21-410D-8480-4D8066101D56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileMovieManager.BLL", "MobileMovieManager.BLL\MobileMovieManager.BLL.csproj", "{70FC96AF-9ECA-490C-8409-D8E94C21A80A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileMovieManager.BLL", "MobileMovieManager.BLL\MobileMovieManager.BLL.csproj", "{70FC96AF-9ECA-490C-8409-D8E94C21A80A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
