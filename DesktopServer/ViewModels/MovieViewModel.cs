@@ -89,6 +89,48 @@ namespace DesktopServer.ViewModels
             }
         }
 
+        private string imdbId;
+        public string ImdbId
+        {
+            get { return imdbId; }
+            set
+            {
+                if (imdbId != value)
+                {
+                    imdbId = value;
+                    OnPropertyChanged("ImdbId");
+                }
+            }
+        }
+
+        private bool isMoreCD;
+        public bool IsMoreCD
+        {
+            get { return isMoreCD; }
+            set
+            {
+                if (isMoreCD != value)
+                {
+                    isMoreCD = value;
+                    OnPropertyChanged("IsMoreCD");
+                }
+            }
+        }
+
+        private bool isSeries;
+        public bool IsSeries
+        {
+            get { return isSeries; }
+            set
+            {
+                if (isSeries != value)
+                {
+                    isSeries = value;
+                    OnPropertyChanged("IsSeries");
+                }
+            }
+        }
+
         private FileType fileType;
         public virtual FileType FileType
         {
