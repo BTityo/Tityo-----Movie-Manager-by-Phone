@@ -25,9 +25,9 @@ namespace MobileMovieManager.DAL.Repository
             return settings;
         }
 
-        public override async Task<Setting> GetByIdAsync(int movieId)
+        public override async Task<Setting> GetByIdAsync(int settingId)
         {
-            var setting = await context.Settings.FindAsync(movieId);
+            var setting = await context.Settings.FindAsync(settingId);
             setting.FileTypes = await context.FileTypes.ToListAsync();
 
             return setting;
