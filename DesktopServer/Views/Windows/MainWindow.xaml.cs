@@ -3,9 +3,6 @@ using DesktopServer.Service;
 using DesktopServer.ViewModels;
 using FirstFloor.ModernUI.Windows.Controls;
 using MobileMovieManager.BLL.Service;
-using System;
-using System.IO;
-using System.Windows;
 
 namespace DesktopServer.Views.Windows
 {
@@ -29,32 +26,9 @@ namespace DesktopServer.Views.Windows
         private async void setViewModel()
         {
             // We use just one Setting (Get and Update this Setting)
-            await settingService.GetSettingByIdAsync(1).ContinueWith(setting =>
+            await settingService.GetSettingByIdAsync(1).ContinueWith(async setting =>
             {
-                settingViewModel = SettingMap.MapToSettingViewModel(setting.Result);
-
-                // Check setted Movies folder is exists
-                if (!Directory.Exists(settingViewModel.MoviesPath))
-                {
-                    this.Dispatcher.Invoke(() =>
-                    {
-                        MessageBoxResult result = ModernDialog.ShowMessage("A(z) '" + settingViewModel.MoviesPath + "' mappa nem létezik! Szeretnéd megváltoztatni?", "'Filmek' mappa nem létezik", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            ContentSource = new Uri("/DesktopServer;component/Views/Pages/Setting.xaml", UriKind.Relative);
-                        }
-                        else
-                        {
-                            ContentSource = new Uri("/DesktopServer;component/Views/Pages/Movie.xaml", UriKind.Relative);
-                        }
-                    });
-                }
-                else
-                {
-                    this.Dispatcher.Invoke(() =>
-                        ContentSource = new Uri("/DesktopServer;component/Views/Pages/Movie.xaml", UriKind.Relative)
-                    );
-                }
+                settingViewModel = SettingMap.MapToSettingViewModel(await setting);
             });
         }
     }

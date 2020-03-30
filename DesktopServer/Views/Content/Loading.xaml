@@ -8,6 +8,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <mui:ModernProgressRing IsActive="True" Width="300" Height="200" Style="{StaticResource CircleProgressRingStyle}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+            <mui:BBCodeBlock BBCode="Kérem várjon" HorizontalAlignment="Center" FontSize="20"/>
+            <mui:BBCodeBlock BBCode="Filmek [color=green]betöltés[/color]e folyamatban..." FontSize="22" HorizontalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Margin="0,50,0,0">
+            <mui:ModernProgressRing IsActive="True" Width="400" Height="300" Style="{StaticResource CircleProgressRingStyle}" />
+        </StackPanel>
     </Grid>
 </UserControl>

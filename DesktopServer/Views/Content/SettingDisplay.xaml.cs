@@ -32,9 +32,9 @@ namespace DesktopServer.Views.Content
         private async void setViewModel()
         {
             // We use just one Setting (Get and Update this Setting)
-            await settingService.GetSettingByIdAsync(1).ContinueWith(setting =>
+            await settingService.GetSettingByIdAsync(1).ContinueWith(async setting =>
             {
-                settingViewModel = SettingMap.MapToSettingViewModel(setting.Result);
+                settingViewModel = SettingMap.MapToSettingViewModel(await setting);
                 this.DataContext = settingViewModel;
             });
         }

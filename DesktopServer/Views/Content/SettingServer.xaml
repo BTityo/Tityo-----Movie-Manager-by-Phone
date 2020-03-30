@@ -45,7 +45,7 @@
                     <mui:BBCodeBlock Grid.Row="2" BBCode="[color=red]*[/color]" VerticalAlignment="Center" Margin="0,0,0,4" HorizontalAlignment="Left"/>
                     <Label Grid.Row="2" Content="Filmek könyvtár:" Target="{Binding ElementName=textBoxMoviesPath}" VerticalAlignment="Center" Margin="8,0,16,4" />
                     <TextBox x:Name="textBoxMoviesPath" Grid.Row="2" Grid.Column="1" Text="{Binding MoviesPath, Mode=TwoWay, ValidatesOnDataErrors=True}" VerticalAlignment="Center" Margin="0,0,0,4" MinWidth="120" />
-                    <Button x:Name="buttonOpenMovieFolder" Grid.Row="2" Grid.Column="2" Content="Megnyitás" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,0,0,4" FontSize="11"/>
+                    <Button x:Name="buttonOpenMovieFolder" Grid.Row="2" Grid.Column="2" Content="Megnyitás" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,0,0,4" FontSize="11" Click="buttonOpenMovieFolder_Click"/>
 
                     <Label Grid.Row="3" Content="Csatolt telefon:" VerticalAlignment="Center" Margin="0,0,16,4" />
                     <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True" Text="{Binding ConnectedPhone, Mode=TwoWay}" VerticalAlignment="Center" />

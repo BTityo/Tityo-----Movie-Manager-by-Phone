@@ -4,8 +4,11 @@ using DesktopServer.ViewModels;
 using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Controls;
 using FirstFloor.ModernUI.Windows.Navigation;
+using Microsoft.Win32;
 using MobileMovieManager.BLL.Service;
+using Ookii.Dialogs.Wpf;
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -45,7 +48,7 @@ namespace DesktopServer.Views.Content
         {
             Binding myBinding;
             CheckBox checkBox;
-            foreach (FileTypeViewModel fileTypeViewModel in settingViewModel.FileTypeViewModels)
+            foreach (FileTypeViewModel fileTypeViewModel in settingViewModel.FileTypeViewModels.Where(f => f.Id > 0))
             {
                 checkBox = new CheckBox();
                 myBinding = new Binding();
@@ -62,11 +65,6 @@ namespace DesktopServer.Views.Content
                 this.Dispatcher.Invoke(() => stackPanelTypes.Children.Add(checkBox));
             }
         }
-
-        //private async void buttonSave_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //}
 
         void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -112,6 +110,16 @@ namespace DesktopServer.Views.Content
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        // Open 'movie' folder
+        private void buttonOpenMovieFolder_Click(object sender, RoutedEventArgs e)
+        {
+            VistaFolderBrowserDialog openFileDialog = new VistaFolderBrowserDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                settingViewModel.MoviesPath = openFileDialog.SelectedPath;
+            }
         }
     }
 }
