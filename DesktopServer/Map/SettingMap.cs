@@ -23,7 +23,7 @@ namespace DesktopServer.Map
                     IsStartWithWindows = settingViewModel.IsStartWithWindows,
                     ConnectedPhone = settingViewModel.ConnectedPhone,
                     MoviesPath = settingViewModel.MoviesPath,
-                    FileTypes = FileTypeMap.MapToFileTypeList(settingViewModel.FileTypeViewModels),
+                    FileTypes = FileTypeMap.MapToFileTypeList(settingViewModel.FileTypeViewModels.Where(t => t.Id != 1).ToList()),
                     SelectedAccentColor = convertColorToByteArray(settingViewModel.SelectedAccentColor),
                     SelectedPalette = settingViewModel.SelectedPalette,
                     SelectedTheme = settingViewModel.SelectedTheme.DisplayName
@@ -49,7 +49,7 @@ namespace DesktopServer.Map
                     IsStartWithWindows = setting.IsStartWithWindows,
                     ConnectedPhone = setting.ConnectedPhone,
                     MoviesPath = setting.MoviesPath,
-                    FileTypeViewModels = FileTypeMap.MapToFileTypeViewModelList(setting.FileTypes.ToList()),
+                    FileTypeViewModels = FileTypeMap.MapToFileTypeViewModelList(setting.FileTypes.Where(t => t.Id != 1).ToList()),
                     SelectedAccentColor = convertByteArrayToColor(setting.SelectedAccentColor),
                     SelectedPalette = setting.SelectedPalette,
                     SelectedTheme = setting.SelectedTheme == "Sötét" ? new Link { DisplayName = "Sötét", Source = AppearanceManager.DarkThemeSource } : new Link { DisplayName = "Világos", Source = AppearanceManager.LightThemeSource }
@@ -57,7 +57,7 @@ namespace DesktopServer.Map
             }
             else
             {
-                return null;
+                return new SettingViewModel();
             }
         }
 

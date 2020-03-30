@@ -12,6 +12,7 @@ namespace DesktopServer.Map
             {
                 return new FileType()
                 {
+                    Id = fileTypeViewModel.Id,
                     TypeName = fileTypeViewModel.TypeName,
                     IsChecked = fileTypeViewModel.IsChecked
                 };
@@ -46,6 +47,7 @@ namespace DesktopServer.Map
             {
                 return new FileTypeViewModel()
                 {
+                    Id = fileType.Id,
                     IsChecked = fileType.IsChecked,
                     TypeName = fileType.TypeName
                 };
