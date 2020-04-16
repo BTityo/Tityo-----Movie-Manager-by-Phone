@@ -16,6 +16,7 @@ namespace MobileMovieManager.DAL.Context
         public DbSet<FileType> FileTypes { get; set; }
         public DbSet<FileSize> FileSizes { get; set; }
         public DbSet<Filter> Filters { get; set; }
+        public DbSet<Logger> Loggers { get; set; }
 
         public MobileMovieManagerDbContext(string databasePath)
         {
@@ -29,8 +30,8 @@ namespace MobileMovieManager.DAL.Context
                 this.FileSizes.Add(new FileSize() { Id = 1, SizeName = "Válassz file méretet" });
                 this.FileSizes.Add(new FileSize() { Id = 2, SizeName = "< 1,00 GB" });
                 this.FileSizes.Add(new FileSize() { Id = 3, SizeName = "1,00 GB - 2,00 GB" });
-                this.FileSizes.Add(new FileSize() { Id = 4, SizeName = "2,10 GB - 5,00 GB" });
-                this.FileSizes.Add(new FileSize() { Id = 5, SizeName = "> 5,00 GB" });
+                this.FileSizes.Add(new FileSize() { Id = 4, SizeName = "2,00 GB - 5,00 GB" });
+                this.FileSizes.Add(new FileSize() { Id = 5, SizeName = ">= 5,00 GB" });
 
                 // Create default filetypes
                 this.FileTypes.Add(new FileType() { Id = 1, TypeName = "Válassz file típust", IsChecked = true });

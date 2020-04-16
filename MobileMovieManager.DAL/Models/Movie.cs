@@ -55,7 +55,7 @@ namespace MobileMovieManager.DAL.Models
         public int FileTypeId { get { return fileTypeId; } set { fileTypeId = value; } }
 
         private FileType fileType;
-        public virtual FileType FileType { get { return fileType; } set { fileType = value; } }
+        public FileType FileType { get { return fileType; } set { fileType = value; } }
 
         public IntPtr Handle => throw new NotImplementedException();
 

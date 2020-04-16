@@ -5,13 +5,13 @@ namespace MobileMovieManager.DAL.Models
 {
     public class Connection
     {
-        public List<Socket> ClientSockets { get; set; }
-        public Socket ClientSocket { get; set; }
+        public List<ClientConnection> ClientSockets { get; set; }
+        public ClientConnection ClientSocket { get; set; }
         public Socket ServerSocket { get; set; }
 
         public Connection()
         {
-            ClientSockets = new List<Socket>();
+            ClientSockets = new List<ClientConnection>();
         }
 
         private static Connection _instance;
