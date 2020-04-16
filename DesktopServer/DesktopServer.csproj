@@ -7,18 +7,75 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Contents\Images\close.png" />
+    <None Remove="Contents\Images\copy.bmp" />
+    <None Remove="Contents\Images\cut.bmp" />
+    <None Remove="Contents\Images\delete.bmp" />
+    <None Remove="Contents\Images\exit.png" />
     <None Remove="Contents\Images\Icon\Logo.svg" />
+    <None Remove="Contents\Images\maximize.png" />
+    <None Remove="Contents\Images\minimize.png" />
+    <None Remove="Contents\Images\paste.bmp" />
+    <None Remove="Contents\Images\play.png" />
+    <None Remove="Contents\Images\profile.png" />
+    <None Remove="Contents\Images\redo.bmp" />
+    <None Remove="Contents\Images\restore.png" />
+    <None Remove="Contents\Images\sendto.bmp" />
+    <None Remove="Contents\Images\undo.bmp" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Contents\Images\close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Contents\Images\copy.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Contents\Images\cut.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Contents\Images\delete.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Contents\Images\exit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Contents\Images\Icon\Logo.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Contents\Images\maximize.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Contents\Images\minimize.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Contents\Images\paste.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Contents\Images\play.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Contents\Images\profile.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Contents\Images\redo.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Contents\Images\restore.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Contents\Images\sendto.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Contents\Images\undo.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="ModernUI.WPFCore" Version="2.0.0" />
-    <PackageReference Include="Ookii.Dialogs.Wpf.NETCore" Version="2.0.0" />
+    <PackageReference Include="NAudio" Version="1.10.0" />
+    <PackageReference Include="Ookii.Dialogs.Wpf.NETCore" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +91,13 @@
     <Reference Include="MessageBoxManager">
       <HintPath>..\..\XamarinTemplates\MessageBoxManager\MessageBoxManager\bin\Release\MessageBoxManager.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Windows.Shell">
+      <HintPath>Contents\Binaries\Microsoft.Windows.Shell.dll</HintPath>
+      <Aliases>global</Aliases>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +105,30 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Pages\Movie.Filter.xaml.cs">
+      <DependentUpon>Movie.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Windows\PlayerWindow.WindowBorder.xaml.cs">
+      <DependentUpon>PlayerWindow.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Windows\PlayerWindow.MainEvents.xaml.cs">
+      <DependentUpon>PlayerWindow.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Windows\PlayerWindow.Player.xaml.cs">
+      <DependentUpon>PlayerWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 

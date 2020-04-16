@@ -2,10 +2,12 @@
 using DesktopServer.Service;
 using DesktopServer.ViewModels;
 using DesktopServer.Views.Content;
+using DesktopServer.Views.Windows;
 using FirstFloor.ModernUI.Windows.Controls;
 using FirstFloor.ModernUI.Windows.Navigation;
 using MobileMovieManager.BLL.FileServer;
 using MobileMovieManager.BLL.Service;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -14,7 +16,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
 using DALModel = MobileMovieManager.DAL.Models;
 
 namespace DesktopServer.Views.Pages
@@ -30,6 +31,7 @@ namespace DesktopServer.Views.Pages
         private readonly FilterService filterService;
         private readonly FileSizeService fileSizeService;
         private readonly FileTypeService fileTypeService;
+        private SocketServerService socketServer;
         // ViewModels
         private SettingViewModel settingViewModel;
         private ObservableCollection<MovieViewModel> movieViewModels;
@@ -40,17 +42,21 @@ namespace DesktopServer.Views.Pages
 
         public Movie()
         {
+            // Initialize ViewModels
             filterViewModel = new FilterViewModel();
             settingViewModel = new SettingViewModel();
             movieViewModels = new ObservableCollection<MovieViewModel>();
+            // Initialize services
             settingService = new SettingService(Constants.LocalDBPath);
             movieService = new MovieService(Constants.LocalDBPath);
             filterService = new FilterService(Constants.LocalDBPath);
             fileSizeService = new FileSizeService(Constants.LocalDBPath);
             fileTypeService = new FileTypeService(Constants.LocalDBPath);
+            socketServer = new SocketServerService();
 
             InitializeComponent();
-            // Set fullscreen
+
+            // Set MovieViewModel and Show Loading
             startTaskSetMovieViewModel();
         }
 
@@ -108,8 +114,14 @@ namespace DesktopServer.Views.Pages
                 // We have no movies in database
                 if (movieViewModels.Count <= 0)
                 {
-                    var insertedMovies = await movieService.InsertAllMovieAsync(moviesFromFileServer);
-                    movieViewModels = MovieMap.MapToMovieViewModelList(insertedMovies);
+                    await movieService.InsertAllMovieAsync(moviesFromFileServer).ContinueWith(async moviesResult =>
+                       {
+                           movieViewModels = MovieMap.MapToMovieViewModelList(await moviesResult);
+                           // Start Socket Server after new movies
+                           socketServer.StartServer(settingViewModel);
+                       }
+                    );
+                    //movieViewModels = MovieMap.MapToMovieViewModelList(insertedMovies);
                 }
                 else
                 {
@@ -125,7 +137,10 @@ namespace DesktopServer.Views.Pages
                     if (inserted != null && inserted.Count > 0)
                     {
                         // Insert my movies
-                        await movieService.InsertAllMovieAsync(inserted);
+                        await movieService.InsertAllMovieAsync(inserted).ContinueWith(moviesResult =>
+                            // Start Socket Server after new movies
+                            socketServer.StartServer(settingViewModel)
+                        );
                     }
 
                     // Correct current movies what can search with TMDB
@@ -163,7 +178,12 @@ namespace DesktopServer.Views.Pages
             await Task.Factory.StartNew(async () =>
             {
                 var movies = MovieMap.MapToMovieList(movieViewModels);
-                await movieService.UpdateAllMovieAsync(movies);
+                await movieService.UpdateAllMovieAsync(movies).ContinueWith(moviesResult =>
+                {
+                    socketServer.CloseClientConnection("Kapcsolat bezárása...");
+                    // Start Socket Server after new movies
+                    socketServer.StartServer(settingViewModel);
+                });
 
                 var filter = FilterMap.MapFilterViewModelToFilter(filterViewModel);
                 await filterService.UpdateFilterAsync(filter);
@@ -182,6 +202,7 @@ namespace DesktopServer.Views.Pages
                     dockPanelLoading.Visibility = Visibility.Collapsed;
                     stackPanelSearch.Visibility = Visibility.Visible;
                     dockPanelFilter.Visibility = Visibility.Visible;
+                    stackPanelOrder.Visibility = Visibility.Visible;
                     borderMovies.Visibility = Visibility.Visible;
                     stackPanelButtons.Visibility = Visibility.Visible;
                 })
@@ -196,6 +217,7 @@ namespace DesktopServer.Views.Pages
                 {
                     stackPanelSearch.Visibility = Visibility.Collapsed;
                     dockPanelFilter.Visibility = Visibility.Collapsed;
+                    stackPanelOrder.Visibility = Visibility.Collapsed;
                     borderMovies.Visibility = Visibility.Collapsed;
                     stackPanelButtons.Visibility = Visibility.Collapsed;
                     dockPanelLoading.Visibility = Visibility.Visible;
@@ -209,24 +231,31 @@ namespace DesktopServer.Views.Pages
             startTaskSetMovieViewModel();
         }
 
-        // Search event
-        private void textBoxSearch_PreviewKeyDown(object sender, KeyEventArgs e)
+        // Click on Listbox Element
+        private async void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            string searched = (((TextBox)sender).Text + e.Key.ToString()).ToUpper().Trim();
+            // Get menu item name
+            string menuItemName = ((MenuItem)sender).Name;
+            int selectedMovieViewModelId = Convert.ToInt32(((MenuItem)sender).Tag);
+            MovieViewModel selectedMovieViewModel = MovieMap.MapToMovieViewModel(await movieService.GetMovieByIdAsync(selectedMovieViewModelId));
 
-            if (searched.Length > 3)
+            switch (menuItemName)
             {
-                this.Dispatcher.Invoke(() =>
-                {
-                    listViewMovies.ItemsSource = movieViewModels.Where(m => m.Title.ToUpper().Contains(searched) || m.FullPath.ToUpper().Contains(searched) || m.FolderTitle.ToUpper().Contains(searched) || m.FileType.TypeName.ToUpper().Contains(searched));
-                });
+                case "menuItemPlayMovie":
+                    ((ModernWindow)Application.Current.MainWindow).Hide();
+
+                    new PlayerWindow(selectedMovieViewModel).Show();
+                    break;
+                case "menuItemMovieProfile":
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        IInputElement target = NavigationHelper.FindFrame("_top", this);
+                        NavigationCommands.GoToPage.Execute("/Views/Content/MovieProfile.xaml#" + selectedMovieViewModelId, target);
+                    });
+                    break;
+                default:
+                    break;
             }
-        }
-
-        // Filter event
-        private void buttonFilter_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

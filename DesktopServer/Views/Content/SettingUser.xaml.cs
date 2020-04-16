@@ -4,6 +4,7 @@ using DesktopServer.ViewModels;
 using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Controls;
 using FirstFloor.ModernUI.Windows.Navigation;
+using MobileMovieManager.BLL.FileServer;
 using MobileMovieManager.BLL.Service;
 using System;
 using System.Windows;
@@ -37,24 +38,6 @@ namespace DesktopServer.Views.Content
                 this.DataContext = settingViewModel;
             });
         }
-
-        //private async void buttonSave_Click(object sender, RoutedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (String.IsNullOrEmpty(textBoxUserName.Text) || String.IsNullOrWhiteSpace(textBoxUserName.Text))
-        //        {
-        //            textBoxUserName.Text = "-";
-        //            settingViewModel.UserName = "-";
-        //        }
-
-        //        await settingService.UpdateSettingAsync(SettingMap.MapSettingViewModelToSetting(settingViewModel));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ModernDialog.ShowMessage(ex.Message, "Hiba mentés közben", MessageBoxButton.OK);
-        //    }
-        //}
 
         public void OnFragmentNavigation(FragmentNavigationEventArgs e)
         {

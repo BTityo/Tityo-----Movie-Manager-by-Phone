@@ -1,4 +1,5 @@
-﻿using FirstFloor.ModernUI.Presentation;
+﻿using DesktopServer.Service;
+using FirstFloor.ModernUI.Presentation;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -196,6 +197,14 @@ namespace DesktopServer.ViewModels
             {
                 if (isStartWithWindows != value)
                 {
+                    if (value)
+                    {
+                        StartupService.SetAppToStartUp();
+                    }
+                    else
+                    {
+                        StartupService.RemoveAppFromStartUp();
+                    }
                     isStartWithWindows = value;
                     OnPropertyChanged("IsStartWithWindows");
                 }

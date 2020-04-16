@@ -1,14 +1,15 @@
 ﻿using DesktopServer.Map;
-using DesktopServer.Service;
 using DesktopServer.ViewModels;
 using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Controls;
 using FirstFloor.ModernUI.Windows.Navigation;
-using Microsoft.Win32;
+using MobileMovieManager.BLL.FileServer;
 using MobileMovieManager.BLL.Service;
 using Ookii.Dialogs.Wpf;
 using System;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,7 +42,26 @@ namespace DesktopServer.Views.Content
             // We use just one Setting (Get and Update this Setting)
             var setting = await settingService.GetSettingByIdAsync(1);
             settingViewModel = SettingMap.MapToSettingViewModel(setting);
+            // Set IP automatically
+            settingViewModel.ServerIP = getMyIP();
             this.DataContext = settingViewModel;
+        }
+
+        // Get my IP Address
+        private string getMyIP()
+        {
+            string ipAddress = "192.168.1.106";
+            // Get my local IP Address
+            IPAddress[] localIp = Dns.GetHostAddresses(Dns.GetHostName());
+            foreach (IPAddress address in localIp)
+            {
+                if (address.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    ipAddress = address.ToString();
+                }
+            }
+
+            return ipAddress;
         }
 
         private void setTypes()
