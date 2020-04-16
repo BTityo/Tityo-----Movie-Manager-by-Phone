@@ -1,4 +1,5 @@
-﻿using MobileMovieManager.DAL.Context;
+﻿using MobileMovieManager.BLL.FileServer;
+using MobileMovieManager.DAL.Context;
 using MobileMovieManager.DAL.Models;
 using MobileMovieManager.DAL.Repository;
 using MobileMovieManager.DAL.Repository.IRepository;
@@ -57,7 +58,10 @@ namespace MobileMovieManager.BLL.Service
         /// <returns>Task<Setting></returns>
         public async Task<Setting> UpdateSettingAsync(Setting setting)
         {
-            return await settingRepo.UpdateAsync(setting);
+            var updatedMovies = await settingRepo.UpdateAsync(setting);
+            await FTPServer.UploadDB();
+
+            return updatedMovies;
         }
 
         /// <summary>

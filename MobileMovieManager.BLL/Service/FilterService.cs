@@ -1,4 +1,5 @@
-﻿using MobileMovieManager.DAL.Context;
+﻿using MobileMovieManager.BLL.FileServer;
+using MobileMovieManager.DAL.Context;
 using MobileMovieManager.DAL.Models;
 using MobileMovieManager.DAL.Repository;
 using MobileMovieManager.DAL.Repository.IRepository;
@@ -57,7 +58,10 @@ namespace MobileMovieManager.BLL.Service
         /// <returns>Task<Filter></returns>
         public async Task<Filter> UpdateFilterAsync(Filter filter)
         {
-            return await filterRepo.UpdateAsync(filter);
+            var updatedFilter = await filterRepo.UpdateAsync(filter);
+            await FTPServer.UploadDB();
+
+            return updatedFilter;
         }
 
         /// <summary>

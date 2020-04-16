@@ -1,4 +1,5 @@
-﻿using MobileMovieManager.DAL.Context;
+﻿using MobileMovieManager.BLL.FileServer;
+using MobileMovieManager.DAL.Context;
 using MobileMovieManager.DAL.Models;
 using MobileMovieManager.DAL.Repository;
 using MobileMovieManager.DAL.Repository.IRepository;
@@ -62,7 +63,10 @@ namespace MobileMovieManager.BLL.Service
         /// <returns>Task<List<Movie>></returns>
         public async Task<List<Movie>> InsertAllMovieAsync(List<Movie> movies)
         {
-            return await movieRepo.InsertAllMovieAsync(movies);
+            var insertedMovies = await movieRepo.InsertAllMovieAsync(movies);
+            await FTPServer.UploadDB();
+
+            return insertedMovies;
         }
 
         /// <summary>
@@ -82,7 +86,10 @@ namespace MobileMovieManager.BLL.Service
         /// <returns>Task<List<Movie>></returns>
         public async Task<List<Movie>> UpdateAllMovieAsync(List<Movie> movies)
         {
-            return await movieRepo.UpdateAllMovieAsync(movies);
+            var updatedMovies = await movieRepo.UpdateAllMovieAsync(movies);
+            await FTPServer.UploadDB();
+
+            return updatedMovies;
         }
 
         /// <summary>
