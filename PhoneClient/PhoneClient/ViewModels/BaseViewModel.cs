@@ -1,18 +1,23 @@
-﻿using System;
+﻿using PhoneClient.Models;
+using PhoneClient.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
 using Xamarin.Forms;
-
-using PhoneClient.Models;
-using PhoneClient.Services;
 
 namespace PhoneClient.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+
+        private int id;
+        public int Id
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
 
         bool isBusy = false;
         public bool IsBusy

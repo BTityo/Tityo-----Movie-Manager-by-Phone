@@ -6,8 +6,10 @@ namespace PhoneClient.Models
 {
     public enum MenuItemType
     {
-        Browse,
-        About
+        Connection,
+        MoviesList,
+        Command,
+        Log
     }
     public class HomeMenuItem
     {

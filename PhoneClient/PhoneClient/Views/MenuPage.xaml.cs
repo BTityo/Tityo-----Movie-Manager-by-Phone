@@ -1,9 +1,7 @@
 ﻿using PhoneClient.Models;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace PhoneClient.Views
 {
@@ -20,8 +18,10 @@ namespace PhoneClient.Views
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
-                new HomeMenuItem {Id = MenuItemType.About, Title="About" }
+                new HomeMenuItem{ Id = MenuItemType.Connection, Title="Kapcsolódás"},
+                new HomeMenuItem {Id = MenuItemType.MoviesList, Title="Filmek lista" },
+                new HomeMenuItem {Id = MenuItemType.Command, Title="Parancsok" },
+                new HomeMenuItem {Id = MenuItemType.Log, Title="Napló" }
             };
 
             ListViewMenu.ItemsSource = menuItems;

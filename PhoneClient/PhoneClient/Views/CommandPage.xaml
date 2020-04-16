@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PhoneClient.Views.CommandPage"
+             xmlns:vm="clr-namespace:PhoneClient.ViewModels"
+             Title="{Binding Title}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#2196F3</Color>
+            <Color x:Key="Accent">#96d1ff</Color>
+            <Color x:Key="LightTextColor">#999999</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid Padding="0,10,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill" Margin="0,5,0,0">
+            <Label Text="Parancsok a film lejátszása közben" FontSize="Medium" />
+        </StackLayout>
+
+        <StackLayout Grid.Row="1" Margin="0,5,0,0">
+            <ListView x:Name="listViewCommandsNow"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                CachingStrategy="RecycleElement">
+                <d:ListView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                    </x:Array>
+                </d:ListView.ItemsSource>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell x:Name="commandsNowParent">
+                            <Button Text="{Binding CommandDescription}" d:Text="{Binding Command}" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16" Clicked="Button_Clicked"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <BoxView Color="Accent" HeightRequest="2"/>
+            <ListView x:Name="listViewCommands"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                CachingStrategy="RecycleElement" Margin="0,5,0,0">
+                <d:ListView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                    </x:Array>
+                </d:ListView.ItemsSource>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell x:Name="commandsParent">
+                            <Button Text="{Binding CommandDescription}" d:Text="{Binding Command}" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16" Clicked="Button_Clicked"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </Grid>
+</ContentPage>
