@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneClient.UWP", "PhoneClient\PhoneClient.UWP\PhoneClient.UWP.csproj", "{117AFEA6-E79C-4DC5-9453-2C595228F26E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneClient.Android", "PhoneClient\PhoneClient.Android\PhoneClient.Android.csproj", "{18AEFD88-AA49-4E29-9C4C-1ADFD206546A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneClient", "PhoneClient\PhoneClient\PhoneClient.csproj", "{E9DB0505-9545-4471-B071-7AC8B11905C7}"
@@ -27,26 +25,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Debug|ARM.ActiveCfg = Debug|ARM
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Debug|ARM.Build.0 = Debug|ARM
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Debug|ARM.Deploy.0 = Debug|ARM
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Debug|x64.ActiveCfg = Debug|x64
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Debug|x64.Build.0 = Debug|x64
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Debug|x64.Deploy.0 = Debug|x64
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Debug|x86.ActiveCfg = Debug|x86
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Debug|x86.Build.0 = Debug|x86
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Debug|x86.Deploy.0 = Debug|x86
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Release|Any CPU.ActiveCfg = Release|x86
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Release|ARM.ActiveCfg = Release|ARM
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Release|ARM.Build.0 = Release|ARM
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Release|ARM.Deploy.0 = Release|ARM
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Release|x64.ActiveCfg = Release|x64
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Release|x64.Build.0 = Release|x64
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Release|x64.Deploy.0 = Release|x64
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Release|x86.ActiveCfg = Release|x86
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Release|x86.Build.0 = Release|x86
-		{117AFEA6-E79C-4DC5-9453-2C595228F26E}.Release|x86.Deploy.0 = Release|x86
 		{18AEFD88-AA49-4E29-9C4C-1ADFD206546A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{18AEFD88-AA49-4E29-9C4C-1ADFD206546A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18AEFD88-AA49-4E29-9C4C-1ADFD206546A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
